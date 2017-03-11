@@ -1,0 +1,44 @@
+.share-btn-wrp {
+    list-style: none;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    width: 32px;
+    left: 0px;
+    position: fixed;
+}
+.share-btn-wrp .button-wrap{
+    text-indent:-100000px;
+    width:32px;
+    height: 32px;
+    cursor:pointer;
+    transition: width 0.1s ease-in-out;
+}
+.share-btn-wrp > .facebook{
+    background: url(../img/share-icons.png) no-repeat -42px 0px;
+}
+.share-btn-wrp > .facebook:hover{
+    background: url(../img/share-icons.png) no-repeat -4px -0px;
+    width:38px;
+}
+.share-btn-wrp > .twitter{
+    background: url(../img/share-icons.png) no-repeat -42px -34px;
+}
+.share-btn-wrp > .twitter:hover{
+    background: url(../img/share-icons.png) no-repeat -4px -34px;
+    width:38px;
+}
+
+@media all and (max-width: 699px) {
+    .share-btn-wrp{
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        bottom: 1px;
+    }
+    .share-btn-wrp .button-wrap {
+        display: inline-block;
+        margin-left: -2px;
+        margin-right: -2px;
+    }
+}
