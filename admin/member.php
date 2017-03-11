@@ -12,9 +12,6 @@ include '../config.php';
 
 date_default_timezone_set('Asia/Singapore');
 
-//Get Menu
-$menu = (isset($_GET['menu']) ? $_GET['menu'] : null);
-
 ?>
 
 <!DOCTYPE html>
@@ -79,11 +76,11 @@ $menu = (isset($_GET['menu']) ? $_GET['menu'] : null);
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li class="active">
-                            <a href="index.php"><i class="icon-chevron-right"></i> Dashboard </a>
-                        </li>
                         <li>
-                            <a href="member.php"> Member </a>
+                            <a href="index.php"> Dashboard </a>
+                        </li>
+                        <li class="active">
+                            <a href="member.php"><i class="icon-chevron-right"></i> Member </a>
                         </li>
                     </ul>
                 </div>
@@ -103,37 +100,26 @@ $menu = (isset($_GET['menu']) ? $_GET['menu'] : null);
 
                     <!-- Content -->
 
-                    <?php
-                        if ($menu == "add_post"){
-                             include "add_post.php";
-                        } else if ($menu == "edit_post"){
-                             include "edit_post.php";   
-                        } else {
-                    ?>
-
                      <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">MANAGE POSTS</div>
+                                <div class="muted pull-left">MANAGE MEMBERS</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                   <div class="table-toolbar">
-                                      <div class="btn-group pull-right" style="margin-bottom:15px;">
-                                         <a href="index.php?menu=add_post"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
-                                      </div>
-                                   </div>
-                                    
+                                                                     
                                     <table cellpadding="0" cellspacing="0" border="0" class="table table-hover table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Title</th>
-                                                <th>Description</th>
-                                                <th>Featured Image</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
+                                                <th>Full Name</th>
+                                                <th>Email Address</th>
+                                                <th>Double-Income Family</th>
+                                                <th>First Time Dad</th>
+                                                <th>Children Age Group</th>
+                                                <th>Interest</th>
+                                                <th>Registration Date</th>
                                             </tr>
                                         </thead>
 
@@ -141,7 +127,7 @@ $menu = (isset($_GET['menu']) ? $_GET['menu'] : null);
 
                                             <?php
                                                 $no=1;
-                                                $sql = "SELECT * FROM post ORDER BY post_id DESC";
+                                                $sql = "SELECT * FROM member ORDER BY member_registration_date DESC";
                                                 $result = $conn->query($sql);
 
                                                 if ($result->num_rows > 0) {
@@ -150,25 +136,17 @@ $menu = (isset($_GET['menu']) ? $_GET['menu'] : null);
 
                                             <tr class="odd gradeX">
                                                 <td><?php echo $no++; ?></td>
-                                                <td width="15%"><?php echo $row["post_title"]?></td>
-                                                <td width="40%"><?php echo $row["post_description"]?></td>
+                                                <td width="10%"><?php echo $row["member_name"]?></td>
+                                                <td width="30%"><?php echo $row["member_email"]?></td>
+                                                <td class="center"><?php echo $row["member_double_income"]?></td>
+                                                <td class="center"><?php echo $row["member_first_time_parent"]?></td>
+                                                <td class="center"><?php echo $row["member_child_age"]?></td>
                                                 <td class="center">
-                                                    <a href="../img/post/<?php echo $row["post_image"]; ?>" target="_blank">
-                                                        <img src="../img/post/<?php echo $row["post_image"]; ?>"/ width="100px">
-                                                    </a>
-                                                </td>
-                                                <td class="center">
-                                                    <span class="label label-<?php echo $row["post_category"]?>">
-                                                        <?php echo $row["post_category"]; ?>
+                                                    <span class="label label-<?php echo $row["member_interest"]?>">
+                                                        <?php echo $row["member_interest"]; ?>
                                                     </span>
                                                 </td>
-                                                <td class="center"> 
-                                                    <a href="index.php?menu=edit_post&id=<?= $row["post_id"]; ?>" class="btn btn-info btn-lg"><span class="icon-edit icon-white"></span></a>
-                                                    
-                                                    <a href="functions/delete_post_function.php?id=<?= $row["post_id"]; ?>" class="btn btn-danger btn-lg" onClick="return confirm('Confirm delete?');">
-                                                        <span class="icon-trash icon-white"></span>
-                                                    </a>
-                                                </td>
+                                                <td><?php echo $row["member_registration_date"]?></td>
                                             </tr>
 
                                             <?php } } ?>
@@ -182,7 +160,6 @@ $menu = (isset($_GET['menu']) ? $_GET['menu'] : null);
                         <!-- /block -->
                     </div>
 
-                    <?php } ?>
 
                     <!-- END .Content -->
 
